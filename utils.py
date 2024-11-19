@@ -1,16 +1,5 @@
 import random
 
-def teiler(n: int) -> list[int]:
-    if ist_primzahl(n):
-        return [n]
-    teiler: list[int] = [i for i in range(2, n // 2 + 1) if n % i == 0]
-    teiler.append(n)
-    return teiler
-
-def teiler_fremde_zahlen(phi: int) -> list[int]:
-    phi_teiler: list[int] = teiler(phi)
-    return [i for i in range(2, phi) if not (set(phi_teiler) & set(teiler(i)))]
-
 def multiplikative_inverse(e: int, phi: int, N: int) -> int:
     d: int = 2
     while True:
@@ -34,6 +23,17 @@ def zufällige_primzahl(von: int, bis: int, außer: int | None = None) -> int | 
     if primzahlen:
         return random.choice(primzahlen)
     return None
+
+def teiler(n: int) -> list[int]:
+    if ist_primzahl(n):
+        return [n]
+    teiler: list[int] = [i for i in range(2, n // 2 + 1) if n % i == 0]
+    teiler.append(n)
+    return teiler
+
+def teiler_fremde_zahlen(phi: int) -> list[int]:
+    phi_teiler: list[int] = teiler(phi)
+    return [i for i in range(2, phi) if not (set(phi_teiler) & set(teiler(i)))]
 
 def verschlüsseln(m: int, e: int, N: int) -> int:
     return (m**e) % N
